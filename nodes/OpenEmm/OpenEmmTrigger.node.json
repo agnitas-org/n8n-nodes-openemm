@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.openemmTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content", "Communication"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://emm.agnitas.de/manual/en/pdf/AGNITAS_EMM_Webhooks-Documentation.pdf"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://emm.agnitas.de/manual/en/pdf/AGNITAS_EMM_Webhooks-Documentation.pdf"
+			}
+		]
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.openemm",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content", "Communication"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://emm.agnitas.de/manual/en/pdf/EMM_Restful_Documentation.html"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://emm.agnitas.de/manual/en/pdf/EMM_Restful_Documentation.html"
+			}
+		]
+	}
+}
