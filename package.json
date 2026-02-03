@@ -3,12 +3,14 @@
 	"version": "0.2.0",
 	"description": "Automated email communication",
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://www.agnitas.com",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"openemm",
+		"agnitas"
 	],
 	"author": {
-		"name": "www.agnitas.com",
+		"name": "AGNITAS AG",
 		"email": "info@agnitas.ag"
 	},
 	"repository": {
@@ -47,5 +49,8 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"n8n-node": "^1.0.0"
 	}
 }
