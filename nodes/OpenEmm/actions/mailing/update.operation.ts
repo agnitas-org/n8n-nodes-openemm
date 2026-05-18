@@ -93,6 +93,13 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
+				displayName: 'Pre-Header',
+				name: 'preHeader',
+				type: 'string',
+				default: '',
+				description: 'The pre-header used to update the mailing',
+			},
+			{
 				displayName: 'Reply Address',
 				name: 'replyAddress',
 				type: 'string',
@@ -171,6 +178,9 @@ export async function execute(this: IExecuteFunctions, i: number) {
 	}
 	if (additionalFields?.subject != null) {
 		body.subject = additionalFields.subject;
+	}
+	if (additionalFields?.preHeader != null) {
+		body.preHeader = additionalFields.preHeader;
 	}
 	if (additionalFields?.replyAddress != null) {
 		body.reply_address = additionalFields.replyAddress;
