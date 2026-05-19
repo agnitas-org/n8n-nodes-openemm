@@ -1,6 +1,6 @@
 {
 	"name": "@openemm/n8n-nodes-openemm",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"description": "Automated email communication",
 	"license": "MIT",
 	"homepage": "https://www.agnitas.com",
@@ -31,7 +31,7 @@
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
-        "strict": true,
+		"strict": true,
 		"credentials": [
 			"dist/credentials/EmmBasicApi.credentials.js"
 		],
