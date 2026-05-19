@@ -1,4 +1,12 @@
-import type { IExecuteFunctions, INodeType, INodeTypeDescription } from 'n8n-workflow';
+import {
+	INodeExecutionData,
+	JsonObject,
+	NodeApiError,
+	NodeConnectionTypes,
+	type IExecuteFunctions,
+	type INodeType,
+	type INodeTypeDescription,
+} from 'n8n-workflow';
 import * as loadOptions from './methods/loadOptions';
 import * as mailinglist from './actions/mailinglist';
 import * as recipient from './actions/recipient';
@@ -17,8 +25,8 @@ export class OpenEmm implements INodeType {
 		description: 'Consume EMM API',
 		defaults: { name: 'OpenEMM' },
 		usableAsTool: true,
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'emmBasicApi',
@@ -51,12 +59,12 @@ export class OpenEmm implements INodeType {
 						value: 'content',
 					},
 					{
-						name: 'Recipient',
-						value: 'recipient',
-					},
-					{
 						name: 'Mailing List',
 						value: 'mailinglist',
+					},
+					{
+						name: 'Recipient',
+						value: 'recipient',
 					},
 				],
 				default: 'mailing',
@@ -72,7 +80,34 @@ export class OpenEmm implements INodeType {
 
 	methods = { loadOptions };
 
-	async execute(this: IExecuteFunctions) {
-		return await router.call(this);
-	}
+async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+        const items = this.getInputData();
+        const returnData: INodeExecutionData[] = [];
+
+        for (let i = 0; i < items.length; i++) {
+            try {
+                const responseData = await router.call(this, i);
+
+                const executionData = this.helpers.constructExecutionMetaData(
+                    this.helpers.returnJsonArray(responseData as JsonObject | JsonObject[]),
+                    { itemData: { item: i } },
+                );
+                returnData.push(...executionData);
+            } catch (error) {
+                if (this.continueOnFail()) {
+                    returnData.push({ 
+                        json: { error: (error as Error).message },
+                        pairedItem: { item: i } 
+                    });
+                    continue;
+                }
+                throw new NodeApiError(
+                    this.getNode(), 
+                    error as JsonObject, 
+                    { itemIndex: i }
+                );
+            }
+        }
+        return [returnData];
+    }
 }

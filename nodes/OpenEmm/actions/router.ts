@@ -1,11 +1,11 @@
-import { IDataObject, IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { IDataObject, IExecuteFunctions, } from 'n8n-workflow';
 import * as mailing from './mailing';
 import * as mailinglist from './mailinglist';
 import * as content from './content';
 import * as recipient from './recipient';
 
 type OpenEmmExecutable = {
-	execute: (this: IExecuteFunctions, i: number) => Promise<IDataObject>;
+	execute: (this: IExecuteFunctions, i: number) => Promise<IDataObject | IDataObject[]>;
 };
 type ResourceGroup = Record<string, OpenEmmExecutable>;
 
@@ -16,35 +16,14 @@ const resources: Record<string, ResourceGroup> = {
 	mailinglist: mailinglist as unknown as ResourceGroup,
 };
 
-export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-	const items = this.getInputData();
-
-	const returnData: INodeExecutionData[] = [];
-	for (let i = 0; i < items.length; i++) {
-		returnData.push(...(await tryExecuteOperation.call(this, i)));
-	}
-	return [returnData];
-}
-
-async function tryExecuteOperation(
-	this: IExecuteFunctions,
-	i: number,
-): Promise<INodeExecutionData[]> {
-	try {
-		return this.helpers.constructExecutionMetaData(
-			this.helpers.returnJsonArray((await executeOperation.call(this, i)) as IDataObject),
-			{ itemData: { item: i } },
-		);
-	} catch (error) {
-		if (this.continueOnFail()) {
-			return [{ json: { error: error.message } }];
-		}
-		throw error;
-	}
-}
-
-async function executeOperation(this: IExecuteFunctions, i: number): Promise<IDataObject> {
-	const resource = this.getNodeParameter('resource', 0);
-	const operation = this.getNodeParameter('operation', 0);
-	return resources[resource as string]?.[operation]?.execute.call(this, i) ?? [];
+export async function router(this: IExecuteFunctions, i: number): Promise<IDataObject | IDataObject[]> {
+    const resource = this.getNodeParameter('resource', i) as string;
+    const operation = this.getNodeParameter('operation', i) as string;
+    
+    const executable = resources[resource]?.[operation];
+    
+    if (!executable) {
+        throw new Error(`The operation "${operation}" is not known in resource "${resource}".`);
+    }
+    return await executable.execute.call(this, i);
 }

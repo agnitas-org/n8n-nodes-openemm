@@ -1,10 +1,11 @@
-import type {
-	INodeType,
-	IDataObject,
-	IHookFunctions,
-	IWebhookResponseData,
-	IWebhookFunctions,
-	INodeTypeDescription,
+import {
+	type INodeType,
+	type IDataObject,
+	type IHookFunctions,
+	type IWebhookResponseData,
+	type IWebhookFunctions,
+	type INodeTypeDescription,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 export class OpenEmmTrigger implements INodeType {
@@ -19,7 +20,7 @@ export class OpenEmmTrigger implements INodeType {
 		description: 'Interact with EMM',
 		defaults: { name: 'OpenEMM Trigger' },
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
 		webhooks: [
 			{
