@@ -11,7 +11,7 @@ export class OpenEmmTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'OpenEMM Trigger',
 		name: 'openEmmTrigger',
-		icon: 'file:openEmm.svg',
+		icon: 'file:../../icons/openEmm.svg',
 		subtitle:
 			'={{ $parameter["events"]?.length ? "Events: " + $parameter["events"].length : "No events selected" }}',
 		group: ['trigger'],

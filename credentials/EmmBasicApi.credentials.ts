@@ -3,12 +3,18 @@ import type {
 	ICredentialType,
 	INodeProperties,
 	ICredentialTestRequest,
+	Icon,
 } from 'n8n-workflow';
 
 export class EmmBasicApi implements ICredentialType {
 	name = 'emmBasicApi';
 
 	displayName = 'EMM Basic Auth API';
+
+	icon: Icon = {
+		light: 'file:../icons/openEmm.svg',
+		dark: 'file:../icons/openEmm.dark.svg',
+	};
 
 	documentationUrl = 'https://emm.agnitas.de/manual/en/pdf/EMM_Restful_Documentation.html';
 
