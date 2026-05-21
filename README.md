@@ -48,5 +48,4 @@ Use the action nodes to send data to OpenEMM like mailing or recipient data or t
 
 ## History
 
-0.3.0 update license to MIT
-0.2.0 initial public release
+See CHANGELOG.md for details.
