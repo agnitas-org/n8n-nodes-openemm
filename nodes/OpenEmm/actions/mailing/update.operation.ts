@@ -107,11 +107,25 @@ const properties: INodeProperties[] = [
 				description: 'Reply e-mail used to update the mailing',
 			},
 			{
+				displayName: 'Reply Full Name',
+				name: 'replyFullName',
+				type: 'string',
+				default: '',
+				description: 'Reply-to full name used to update the mailing',
+			},
+			{
 				displayName: 'Sender Address',
 				name: 'senderAddress',
 				type: 'string',
 				default: '',
 				description: 'Sender e-mail used to update the mailing',
+			},
+			{
+				displayName: 'Sender Full Name',
+				name: 'senderFullName',
+				type: 'string',
+				default: '',
+				description: 'Sender full name used to update the mailing',
 			},
 			{
 				displayName: 'Shortname',
@@ -185,8 +199,14 @@ export async function execute(this: IExecuteFunctions, i: number) {
 	if (additionalFields?.replyAddress != null) {
 		body.reply_address = additionalFields.replyAddress;
 	}
+	if (additionalFields?.replyFullName != null) {
+		body.reply_fullname = additionalFields.replyFullName;
+	}
 	if (additionalFields?.senderAddress != null) {
 		body.sender_address = additionalFields.senderAddress;
+	}
+	if (additionalFields?.senderFullName != null) {
+		body.sender_fullname = additionalFields.senderFullName;
 	}
 	return await emmRestfulRequest.call(this, `/mailing/${mailingId}`, 'PUT', body);
 }
