@@ -1,6 +1,6 @@
 {
 	"name": "@openemm/n8n-nodes-openemm",
-	"version": "0.3.3",
+	"version": "0.3.4",
 	"description": "Automated email communication",
 	"license": "MIT",
 	"homepage": "https://www.agnitas.com",
