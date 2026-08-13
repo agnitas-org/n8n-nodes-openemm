@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.openemm",
+	"node": "@openemm/n8n-nodes-openemm.openemm",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Marketing & Content", "Communication"],

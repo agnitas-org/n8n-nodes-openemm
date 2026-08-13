@@ -18,7 +18,7 @@ export class OpenEmm implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'OpenEMM',
 		name: 'openEmm',
-		icon: 'file:../../icons/openEmm.svg',
+		icon: { light: 'file:../../icons/openEmm.svg', dark: 'file:../../icons/openEmm.dark.svg' },
 		group: ['output'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',

@@ -1,3 +1,4 @@
+/* eslint-disable @n8n/community-nodes/node-usable-as-tool */
 import {
 	type INodeType,
 	type IDataObject,
@@ -12,7 +13,7 @@ export class OpenEmmTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'OpenEMM Trigger',
 		name: 'openEmmTrigger',
-		icon: 'file:../../icons/openEmm.svg',
+		icon: { light: 'file:../../icons/openEmm.svg', dark: 'file:../../icons/openEmm.dark.svg' },
 		subtitle:
 			'={{ $parameter["events"]?.length ? "Events: " + $parameter["events"].length : "No events selected" }}',
 		group: ['trigger'],
@@ -21,7 +22,6 @@ export class OpenEmmTrigger implements INodeType {
 		defaults: { name: 'OpenEMM Trigger' },
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
-		usableAsTool: true,
 		webhooks: [
 			{
 				name: 'default',
